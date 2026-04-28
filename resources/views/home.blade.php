@@ -4,7 +4,8 @@
 
 @section('content')
 <!-- Start Hero area -->
-<section class="hero-section padding bg-dark d-flex align-items-center" style="min-height: 80vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ asset('img/banner1.jpg') }}'); background-size: cover; background-position: center;">
+@php($heroBanner = asset('img/banner1.jpg'))
+<section class="hero-section padding bg-dark d-flex align-items-center" style="min-height: 80vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ $heroBanner }}'); background-size: cover; background-position: center;">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -20,9 +21,9 @@
             </div>
             <div class="col-lg-4 d-none d-lg-block">
                 <!-- Espacio para la burbuja de precio o imagen destacada similar a la referencia -->
-                <div class="price-bubble wow zoomIn" data-wow-delay="800ms" style="background: var(--primary-orange); width: 200px; height: 200px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; margin-top: 50px; box-shadow: 0 10px 30px rgba(255,109,0,0.4);">
+                <div class="price-bubble wow zoomIn" data-wow-delay="800ms">
                     <span class="small text-uppercase">Desde</span>
-                    <h2 class="text-white mb-0">$1.000</h2>
+                    <h2 class="text-white mb-0"><span>$</span>{{ number_format($valorPublicacion, 0, ',', '.') }}</h2>
                     <span class="small">Publica ya</span>
                 </div>
             </div>
@@ -39,7 +40,7 @@
                 <div class="service_block">
                     <span></span>
                     <div class="service_icon"><img src="{{ asset('img/responsive.png') }}" alt="image" /></div>
-                    <h4>Motos disponibles</h4>      
+                    <h4>Motos disponibles</h4>
                     <a href="{{ route('motos.colombia') }}" class="clv_btn1 wow fadeInUp">Ver Aquí</a>
                 </div>
             </div>
@@ -58,13 +59,31 @@
                     <span></span>
                     <div class="service_icon"><img src="{{ asset('img/creative.png') }}" alt="image" /></div>
                     <h4>Accesorios</h4>
-                    <a href="#" class="clv_btn1 wow fadeInUp">Ver Aquí</a>
+                    <a href="{{ route('accessories.index') }}" class="clv_btn1 wow fadeInUp">Ver Aquí</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .price-bubble {
+        background: #ff6d00;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        margin-top: 50px;
+        box-shadow: 0 10px 30px rgba(255, 109, 0, 0.4);
+    }
+</style>
+@endpush
 
 @push('scripts')
 <script src="{{ asset('assets/particle/particles.min.js') }}"></script>

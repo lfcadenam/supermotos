@@ -42,16 +42,26 @@
                                     <td>{{ $moto->nombre }} <span class="text-muted">({{ $moto->modelo }})</span></td>
                                     <td><span class="text-success font-weight-bold">${{ number_format($moto->valor, 0, ',', '.') }}</span></td>
                                     <td>
-                                        <div class="d-flex gap-1">
+                                        <div class="btn-action-container">
                                             <form action="{{ route('admin.motos.activate', $moto->id_moto_disp) }}" method="POST" class="d-inline">
                                                 @csrf
-                                                <button type="submit" class="btn btn-xs btn-success" title="Activar">
+                                                <button type="submit" class="btn btn-sm btn-success" title="Activar">
                                                     <i class="fa fa-check"></i>
                                                 </button>
                                             </form>
-                                            <button class="btn btn-xs btn-info btn-preview" data-id="{{ $moto->id_moto_disp }}" title="Ver">
+                                            <button class="btn btn-sm btn-info btn-preview" data-id="{{ $moto->id_moto_disp }}" title="Ver">
                                                 <i class="fa fa-eye"></i>
                                             </button>
+                                            <a href="{{ route('admin.motos.edit', $moto->id_moto_disp) }}" class="btn btn-sm btn-primary" title="Editar">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </a>
+                                            <form action="{{ route('admin.motos.delete', $moto->id_moto_disp) }}" method="POST" class="d-inline delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger btn-delete" title="Rechazar/Eliminar">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -134,9 +144,30 @@ $(document).ready(function() {
         const id = $(this).data('id');
         $('#previewContent').html('<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div></div>');
         $('#previewModal').modal('show');
-        
+
         $.get(`/admin/motos/${id}/preview`, function(data) {
             $('#previewContent').html(data);
+        });
+    });
+
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        const form = $(this).closest('form');
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción eliminará permanentemente el registro y todas sus fotos del servidor.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar todo',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
         });
     });
 });

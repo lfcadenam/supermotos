@@ -26,7 +26,7 @@ class PaymentController extends Controller
 
         // Llamada a la API de Bold para verificar estado
         $response = Http::withHeaders([
-            'Authorization' => 'x-api-key 6QAZfgIh9hgrXu1ssTEDLOiuaqwG68pXfC0PnS8Qjbg'
+            'Authorization' => 'x-api-key ' . config('services.bold.api_key')
         ])->get("https://payments.api.bold.co/v2/payment-voucher/{$boldOrderId}");
 
         if ($response->successful()) {

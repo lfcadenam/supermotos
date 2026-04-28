@@ -4,11 +4,10 @@
             <div class="carousel-inner">
                 @php
                     $images = explode(',', $moto->fotos);
-                    $folder = ($moto->moto_inv_ext == 2) ? 'fotos_motos/' : 'admin_files/fotos_motos/';
                 @endphp
                 @foreach($images as $index => $image)
                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                        <img class="d-block w-100" src="{{ asset($folder . trim($image)) }}" alt="Imagen {{ $index }}" style="height: 300px; object-fit: cover;">
+                        <img class="d-block w-100" src="{{ $moto->photoUrl($image) }}" alt="Imagen {{ $index }}" style="height: 300px; object-fit: cover;">
                     </div>
                 @endforeach
             </div>

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html class="no-js" lang="es">
-<head> 
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Supermotos - Compra y venta de motocicletas en Colombia">
     <meta name="author" content="LuisferDeveloper">
     <title>@yield('title', 'Supermotos')</title>
-    
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
-    
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
@@ -26,12 +26,12 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/modern.css') }}">
-    
+
     <script src="{{ asset('js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/brands.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/solid.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css">
-    
+
     @stack('styles')
 </head>
 <body>
@@ -71,7 +71,7 @@
                                 <a href="{{ route('motos.colombia') }}">Motos disponibles</a>
                             </li>
                             <li class="{{ request()->routeIs('motos.create') ? 'active' : '' }}"><a href="{{ route('motos.create') }}">Publicar mi moto</a></li>
-                            <li><a href="#accesorios">Accesorios</a></li>
+                            <li class="{{ request()->routeIs('accessories.index') ? 'active' : '' }}"><a href="{{ route('accessories.index') }}">Accesorios</a></li>
                             <li class="{{ request()->routeIs('pages.contact') ? 'active' : '' }}"><a href="{{ route('pages.contact') }}">Contacto</a></li>
                             @auth
                                 <li class="d-md-none auth-mobile-item">
@@ -121,16 +121,16 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6 sm-padding wow fadeInUp">
                     <div class="footer-logo">
-                        <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="Supermotos"></a>      
+                        <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="Supermotos"></a>
                     </div>
                     <div class="widgets-social">
-                        <a href="https://m.facebook.com/supermotosrt/" target="_blank"> <i class="ti-facebook"></i> </a>	  
+                        <a href="https://m.facebook.com/supermotosrt/" target="_blank"> <i class="ti-facebook"></i> </a>
                         <a href="https://www.instagram.com/supermotoscompany" target="_blank"> <i class="ti-instagram"></i></a>
                         <a href="https://www.tiktok.com/@supermotosrt" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
                                 <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
                             </svg>
-                        </a>	  
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-6 sm-padding wow fadeInUp" data-wow-delay="300ms"></div>
@@ -167,10 +167,11 @@
     <script src="{{ asset('js/vendor/odometer.min.js') }}"></script>
     <script src="{{ asset('js/vendor/wow.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/brands.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/solid.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @stack('scripts')
 </body>

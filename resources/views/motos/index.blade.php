@@ -21,9 +21,9 @@
                         <div class="blog-thumb">
                             @php
                                 $mainFoto = $moto->fotos ? explode(',', $moto->fotos)[0] : 'no-image.png';
-                                $folder = ($moto->moto_inv_ext == 2) ? 'fotos_motos/' : 'admin_files/fotos_motos/';
+                                $fallbackImage = asset('img/no-image.png');
                             @endphp
-                            <img src="{{ asset($folder . trim($mainFoto)) }}" alt="{{ $moto->nombre }}" onerror="this.onerror=null; this.src='{{ asset('img/no-image.png') }}'">
+                            <img src="{{ $moto->photoUrl($mainFoto) }}" alt="{{ $moto->nombre }}" onerror="this.onerror=null; this.src='{{ $fallbackImage }}'">
                         </div>
                         <div class="blog-content">
                             <h3><a href="{{ route('motos.show', md5($moto->id_moto_disp)) }}">{{ $moto->nombre }}</a></h3>

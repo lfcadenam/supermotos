@@ -13,21 +13,25 @@
     font-size: 13px;
     border-bottom: 1px solid #333;
 }
-.top-bar i { color: var(--brand-red); margin-right: 5px; }
+
+.top-bar i {
+    color: var(--brand-red);
+    margin-right: 5px;
+}
 
 .header {
     background: #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     position: relative !important;
 }
 
-.header-menu-wrap ul li > a {
+.header-menu-wrap ul li>a {
     color: #333 !important;
     font-weight: 700;
 }
 
-.header-menu-wrap ul li:hover > a, 
-.header-menu-wrap ul li.active > a {
+.header-menu-wrap ul li:hover>a,
+.header-menu-wrap ul li.active>a {
     color: var(--brand-red) !important;
 }
 
@@ -40,7 +44,7 @@
 
 /* Page Header / Hero */
 .page-header {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../img/banner1.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/banner1.jpg');
     background-size: cover;
     background-position: center;
     padding: 80px 0 !important;
@@ -65,7 +69,7 @@
 
 .blog-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .blog-thumb img {
@@ -133,7 +137,14 @@
     background: #1a1a1a;
     color: #fff;
 }
-.widget-section h4 { color: #fff; border-bottom: 2px solid var(--brand-red); display: inline-block; margin-bottom: 20px; padding-bottom: 5px; }
+
+.widget-section h4 {
+    color: #fff;
+    border-bottom: 2px solid var(--brand-red);
+    display: inline-block;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
 
 /* Header & Menu Dark Theme */
 .primary-header {
@@ -167,6 +178,7 @@
         padding: 10px 8px !important;
         font-size: 12px !important;
     }
+
     .header-logo img {
         max-width: 140px;
         max-height: 45px;
@@ -206,13 +218,13 @@
     .auth-buttons {
         display: none !important;
     }
-    
+
     /* Mobile Menu Buttons */
     .auth-mobile-item {
         padding: 15px 20px !important;
         border: none !important;
     }
-    
+
     .btn-auth-mobile {
         background: var(--brand-red) !important;
         color: #fff !important;
@@ -223,11 +235,11 @@
         font-weight: 700 !important;
         text-transform: uppercase;
         font-size: 14px !important;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         letter-spacing: 0.5px;
         line-height: 1 !important;
     }
-    
+
     .btn-auth-logout {
         background: #333 !important;
         margin-top: -5px;
@@ -238,259 +250,429 @@
         color: var(--brand-red) !important;
         font-weight: bold;
     }
+
     .header-menu-wrap ul li a.text-danger {
         color: #ff4d4d !important;
-        font-weight: bold;
     }
 }
 
-/* Badges */
-.badge-primary { background-color: var(--brand-red) !important; }
-.btn-primary { background-color: var(--brand-red) !important; border-color: var(--brand-red) !important; }
-.btn-outline-primary { color: var(--brand-red) !important; border-color: var(--brand-red) !important; }
-.btn-outline-primary:hover { background-color: var(--brand-red) !important; color: #fff !important; }
-/* Admin Nav Mobile Fixes */
-.admin-nav-links::-webkit-scrollbar {
-    height: 4px;
-}
-.admin-nav-links::-webkit-scrollbar-thumb {
-    background: var(--brand-red);
-    border-radius: 10px;
-}
-.admin-nav-links {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: thin;  /* Firefox */
+/* Admin Action Spacing */
+        .btn-action-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-action-container .btn,
+        .btn-action-container .btn-action {
+            margin-right: 5px;
+        }
+
+        /* Badges */
+        .badge-primary {
+            background-color: var(--brand-red) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-red) !important;
+            border-color: var(--brand-red) !important;
+        }
+
+        .btn-outline-primary {
+            color: var(--brand-red) !important;
+            border-color: var(--brand-red) !important;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--brand-red) !important;
+            color: #fff !important;
+        }
+
+        /* Admin Nav Mobile Fixes */
+        .admin-nav-links::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .admin-nav-links::-webkit-scrollbar-thumb {
+            background: var(--brand-red);
+            border-radius: 10px;
+        }
+
+        .admin-nav-links {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: thin;
+            /* Firefox */
+        }
+
+        @media (max-width: 767px) {
+            .admin-nav-links .btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .admin-nav-links i {
+                font-size: 18px;
+                margin-bottom: 2px;
+                display: block;
+            }
+        }
+
+        /* Form Spacing & Style Fixes */
+        .form-group {
+            margin-bottom: 15px !important;
+        }
+
+        .form-group label {
+            margin-bottom: 4px !important;
+            display: block;
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .form-control {
+            border-radius: 4px !important;
+            height: 42px !important;
+            border: 1px solid #ddd !important;
+            font-size: 14px !important;
+        }
+
+        .form-control:focus {
+            border-color: var(--brand-red) !important;
+            box-shadow: 0 0 0 0.2rem rgba(255, 109, 0, 0.25) !important;
+        }
+
+        .form-check {
+            margin-bottom: 10px;
+        }
+
+        .form-check-label {
+            font-weight: 400 !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* Fix for asterisk line breaks */
+        .text-danger {
+            display: inline !important;
+            margin-left: 2px;
+        }
+
+        label .text-danger {
+            display: inline !important;
+        }
+
+        /* Admin Table Mobile Fixes */
+        .admin-table-mobile th,
+        .admin-table-mobile td {
+            vertical-align: middle;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        @media (max-width: 767px) {
+
+            .admin-table-mobile th,
+            .admin-table-mobile td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+        }
+
+        .btn-xs {
+            padding: 2px 6px;
+            font-size: 11px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+
+        /* Moto Horizontal Cards (Mercado Libre Style) */
+        .moto-horizontal-card {
+            display: flex;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .moto-horizontal-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .moto-card-img {
+            width: 350px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .moto-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .moto-horizontal-card:hover .moto-card-img img {
+            transform: scale(1.05);
+        }
+
+        .moto-card-content {
+            padding: 25px 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .moto-card-header h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .moto-card-header h3 a {
+            color: #222;
+            text-decoration: none;
+        }
+
+        .moto-card-header h3 a:hover {
+            color: var(--brand-red);
+        }
+
+        .moto-card-meta {
+            margin-bottom: 15px;
+        }
+
+        .moto-card-meta span {
+            margin-right: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .moto-card-meta i {
+            color: var(--brand-red);
+            margin-right: 6px;
+        }
+
+        .moto-card-body p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        .moto-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f5f5f5;
+        }
+
+        .moto-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--brand-red);
+        }
+
+        .btn-view-detail {
+            font-weight: 800;
+            color: #333;
+            letter-spacing: 1.2px;
+            font-size: 12px;
+            position: relative;
+            padding-left: 28px;
+            text-decoration: none !important;
+        }
+
+        .btn-view-detail:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: var(--brand-red);
+            transform: translateY(-50%);
+        }
+
+        .btn-back-list {
+            display: inline-flex;
+            align-items: center;
+            color: #444;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-decoration: none !important;
+        }
+
+        .btn-back-list i {
+            margin-right: 10px;
+            font-size: 16px;
+            color: var(--brand-red);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-back-list:hover {
+            color: var(--brand-red);
+        }
+
+        .btn-back-list:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* Security Card (Mercado Libre Style) */
+.security-card-container {
+    padding-top: 40px;
+    margin-top: 40px;
 }
 
-@media (max-width: 767px) {
-    .admin-nav-links .btn {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-    .admin-nav-links i {
-        font-size: 18px;
-        margin-bottom: 2px;
-        display: block;
-    }
+.security-card {
+    background: #f8faff;
+    border: 1px solid #e3e9ff;
+    border-left: 5px solid #3483fa;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 4px 15px rgba(52, 131, 250, 0.05);
 }
 
-/* Form Spacing & Style Fixes */
-.form-group {
-    margin-bottom: 15px !important;
-}
-
-.form-group label {
-    margin-bottom: 4px !important;
-    display: block;
-    font-weight: 600;
-    color: #444;
-    font-size: 14px;
-}
-
-.form-control {
-    border-radius: 4px !important;
-    height: 42px !important;
-    border: 1px solid #ddd !important;
-    font-size: 14px !important;
-}
-
-.form-control:focus {
-    border-color: var(--brand-red) !important;
-    box-shadow: 0 0 0 0.2rem rgba(255, 109, 0, 0.25) !important;
-}
-
-.form-check {
-    margin-bottom: 10px;
-}
-
-.form-check-label {
-    font-weight: 400 !important;
-    margin-bottom: 0 !important;
-}
-
-/* Fix for asterisk line breaks */
-.text-danger {
-    display: inline !important;
-    margin-left: 2px;
-}
-
-label .text-danger {
-    display: inline !important;
-}
-
-/* Admin Table Mobile Fixes */
-.admin-table-mobile th, .admin-table-mobile td {
-    vertical-align: middle;
-    white-space: nowrap;
-    font-size: 14px;
-}
-
-@media (max-width: 767px) {
-    .admin-table-mobile th, .admin-table-mobile td {
-        font-size: 12px;
-        padding: 10px 8px;
-    }
-}
-
-.btn-xs {
-    padding: 2px 6px;
-    font-size: 11px;
-    line-height: 1.5;
-    border-radius: 3px;
-}
-
-/* Moto Horizontal Cards (Mercado Libre Style) */
-.moto-horizontal-card {
-    display: flex;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    border: 1px solid #eee;
-}
-
-.moto-horizontal-card:hover {
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    transform: translateY(-3px);
-}
-
-.moto-card-img {
-    width: 350px;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.moto-card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.moto-horizontal-card:hover .moto-card-img img {
-    transform: scale(1.05);
-}
-
-.moto-card-content {
-    padding: 25px 30px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.moto-card-header h3 {
-    font-size: 24px;
-    margin-bottom: 8px;
+.security-card h4 {
+    font-size: 22px;
+    color: #1e3a8a;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
-.moto-card-header h3 a { color: #222; text-decoration: none; }
-.moto-card-header h3 a:hover { color: var(--brand-red); }
-
-.moto-card-meta {
-    margin-bottom: 15px;
-}
-
-.moto-card-meta span {
-    margin-right: 20px;
-    font-size: 13px;
-    color: #666;
-}
-
-.moto-card-meta i {
-    color: var(--brand-red);
-    margin-right: 6px;
-}
-
-.moto-card-body p {
-    color: #666;
+.security-card p {
+    font-size: 15px;
+    color: #4b5563;
     line-height: 1.6;
-    margin-bottom: 0;
-    font-size: 14px;
 }
 
-.moto-card-footer {
+        .security-shield-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .security-shield-svg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #edf4ff 60%, #e1ecff 100%);
+            border: 1px solid #cfe0ff;
+            box-shadow: 0 8px 24px rgba(52, 131, 250, 0.18);
+        }
+
+        .btn-security-link {
+            color: #3483fa;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .btn-security-link:hover {
+            color: #2968c8;
+        }
+
+.security-list-content {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.security-list-content p {
+    font-size: 15px !important;
+    margin-bottom: 14px;
+    color: #374151;
+    text-align: left;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #f5f5f5;
+    align-items: flex-start;
 }
 
-.moto-price {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--brand-red);
+.security-list-content p::before {
+    content: "\2022";
+    color: #3483fa;
+    font-weight: bold;
+    margin-right: 12px;
+    font-size: 20px;
+    line-height: 1.2;
 }
 
-.btn-view-detail {
-    font-weight: 800;
-    color: #333;
-    letter-spacing: 1.2px;
-    font-size: 12px;
-    position: relative;
-    padding-left: 28px;
-    text-decoration: none !important;
+.security-list-content p b {
+    color: #111827;
+    margin-right: 4px;
 }
 
-.btn-view-detail:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 20px;
-    height: 2px;
-    background: var(--brand-red);
-    transform: translateY(-50%);
-}
+        /* Spacing Utilities */
+        .padding-small {
+            padding: 30px 0 !important;
+        }
 
-/* Pagination Styles */
-.pagination-container .pagination {
-    margin: 0;
-    gap: 8px;
-}
+        .page-header.padding {
+            padding-top: 80px !important;
+            padding-bottom: 40px !important;
+        }
 
-.pagination-container .page-link {
-    border-radius: 6px !important;
-    color: #444;
-    border: 1px solid #ddd;
-    padding: 10px 18px;
-    font-weight: 600;
-    background: #fff;
-    transition: all 0.2s;
-}
+        /* Remove distracting dots pattern if preferred */
+        .dots {
+            display: none !important;
+        }
 
-.pagination-container .page-item.active .page-link {
-    background-color: var(--brand-red) !important;
-    border-color: var(--brand-red) !important;
-    color: #fff !important;
-}
+        /* Pagination Styles */
+        .pagination-container .pagination {
+            margin: 0;
+            gap: 8px;
+        }
 
-.pagination-container .page-link:hover {
-    background-color: #f0f0f0;
-    color: var(--brand-red);
-}
+        .pagination-container .page-link {
+            border-radius: 6px !important;
+            color: #444;
+            border: 1px solid #ddd;
+            padding: 10px 18px;
+            font-weight: 600;
+            background: #fff;
+            transition: all 0.2s;
+        }
 
-@media (max-width: 991px) {
-    .moto-card-img {
-        width: 280px;
-    }
-}
+        .pagination-container .page-item.active .page-link {
+            background-color: var(--brand-red) !important;
+            border-color: var(--brand-red) !important;
+            color: #fff !important;
+        }
 
-@media (max-width: 767px) {
-    .moto-horizontal-card {
-        flex-direction: column;
-    }
-    .moto-card-img {
-        width: 100%;
-        height: 220px;
-    }
-    .moto-card-content {
-        padding: 20px;
-    }
-}
+        .pagination-container .page-link:hover {
+            background-color: #f0f0f0;
+            color: var(--brand-red);
+        }
+
+        @media (max-width: 991px) {
+            .moto-card-img {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .moto-horizontal-card {
+                flex-direction: column;
+            }
+
+            .moto-card-img {
+                width: 100%;
+                height: 220px;
+            }
+
+            .moto-card-content {
+                padding: 20px;
+            }
+        }

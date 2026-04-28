@@ -40,6 +40,11 @@ class ProductService
         return Accesorio::all();
     }
 
+    public function getPublishedAccessories(int $perPage = 12)
+    {
+        return Accesorio::orderBy('id_accesorio', 'desc')->paginate($perPage);
+    }
+
     /**
      * Obtener accesorio por MD5 (Legacy: obtenerAccesoriosID)
      */
@@ -54,5 +59,13 @@ class ProductService
     public function createAccessory(array $data)
     {
         return Accesorio::create($data);
+    }
+
+    public function updateAccessory($id, array $data)
+    {
+        $accessory = Accesorio::findOrFail($id);
+        $accessory->update($data);
+
+        return $accessory;
     }
 }

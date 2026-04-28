@@ -32,6 +32,12 @@
                         </div>
                     @endif
 
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     @if($errors->any())
                         <div class="alert alert-danger">
                             <ul class="mb-0">
@@ -152,8 +158,37 @@
                             <small class="form-text text-muted">Puedes seleccionar varias imágenes.</small>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block mt-30">Guardar e Ir a Pagar</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-30">Guardar e Ir a Pagar</button>
                     </form>
+
+                    @if(session('open_checkout'))
+                        @php $data = session('checkout_data'); @endphp
+                        <!-- Sección de Depuración para Bold -->
+                        <div id="bold-debug-info" class="alert alert-info mt-30 shadow-sm" style="border-left: 5px solid #0056b3;">
+                            <h4 class="alert-heading"><i class="fa fa-bug"></i> Datos Enviados a Bold (Debug)</h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li><strong>Order ID:</strong> {{ $data['orderId'] }}</li>
+                                        <li><strong>Amount:</strong> {{ $data['amount'] }}</li>
+                                        <li><strong>Currency:</strong> COP</li>
+                                        <li><strong>API Key:</strong> <code style="word-break: break-all;">{{ $data['apiKey'] }}</code></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li><strong>Integrity Signature:</strong> <code style="word-break: break-all;">{{ $data['integritySignature'] }}</code></li>
+                                        <li><strong>Description:</strong> {{ $data['description'] }}</li>
+                                        <li><strong>Customer Email:</strong> {{ $data['buyerEmail'] }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-10">
+                                <small class="text-muted">Verifica que la API Key sea la correcta y que la firma de integridad coincida con el orden: <code>orderId + amount + currency + secretKey</code></small>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -162,6 +197,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://checkout.bold.co/library/boldPaymentButton.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 <script>
     ClassicEditor.create(document.querySelector('#descripcion')).catch(error => { console.error(error); });
@@ -176,5 +212,43 @@
             }
         });
     });
+
+    @if(session('open_checkout'))
+        @php $data = session('checkout_data'); @endphp
+        
+        // Esperamos a que la página cargue para asegurar que BoldCheckout esté disponible
+        window.addEventListener('load', function() {
+            // Obtenemos la URL del .env (pasada por sesión) y aseguramos que empiece por https para Bold
+            const rawRedirectionUrl = "{{ $data['redirectionUrl'] }}";
+            const secureRedirectionUrl = rawRedirectionUrl.replace("http://", "https://");
+
+            const boldData = {
+                orderId: "{{ $data['orderId'] }}",
+                currency: "COP",
+                amount: {{ $data['amount'] }},
+                apiKey: "{{ $data['apiKey'] }}",
+                // redirectionUrl: secureRedirectionUrl, // Bold NO permite localhost:8000. El redireccionamiento se maneja en HomeController.
+                integritySignature: "{{ $data['integritySignature'] }}",
+                description: "{{ $data['description'] }}",
+                customerData: JSON.stringify({
+                    email: "{{ $data['buyerEmail'] }}",
+                    fullName: "{{ $data['buyerFullName'] }}",
+                    phone: "{{ $data['payerPhone'] }}"
+                }),
+                billingAddress: JSON.stringify({
+                    city: "{{ $data['billingCity'] }}"
+                }),
+            };
+
+            console.log("🚀 Bold Checkout Initialization Data:", boldData);
+
+            if (typeof BoldCheckout !== 'undefined') {
+                const checkout = new BoldCheckout(boldData);
+                checkout.open();
+            } else {
+                console.error("La librería BoldCheckout no se pudo inicializar. Verifica tu conexión o el bloqueo de scripts.");
+            }
+        });
+    @endif
 </script>
 @endpush

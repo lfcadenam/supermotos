@@ -61,10 +61,10 @@
                         <div class="moto-card-img">
                             @php
                                 $mainFoto = $moto->fotos ? explode(',', $moto->fotos)[0] : 'no-image.png';
-                                $folder = ($moto->moto_inv_ext == 2) ? 'fotos_motos/' : 'admin_files/fotos_motos/';
+                                $fallbackImage = asset('img/no-image.png');
                             @endphp
                             <a href="{{ route('motos.show', md5($moto->id_moto_disp)) }}">
-                                <img src="{{ asset($folder . trim($mainFoto)) }}" alt="{{ $moto->nombre }}" onerror="this.onerror=null; this.src='{{ asset('img/no-image.png') }}'">
+                                <img src="{{ $moto->photoUrl($mainFoto) }}" alt="{{ $moto->nombre }}" onerror="this.onerror=null; this.src='{{ $fallbackImage }}'">
                             </a>
                         </div>
                         <div class="moto-card-content">
@@ -73,8 +73,8 @@
                                 <h3><a href="{{ route('motos.show', md5($moto->id_moto_disp)) }}">{{ $moto->nombre }}</a></h3>
                                 <div class="moto-card-meta">
                                     <span><i class="fa fa-calendar"></i> Modelo {{ $moto->modelo }}</span>
-                                    <span><i class="fa fa-tachometer-alt"></i> {{ $moto->recorrido }} km</span>
-                                    <span><i class="fa fa-map-marker-alt"></i> {{ $moto->ciudad }}</span>
+                                    <span><i class="fa fa-tachometer-alt"></i> {{ $moto->kilometraje }} km</span>
+                                    <span><i class="fa fa-map-marker-alt"></i> {{ $moto->ciudad_clie_moto }}</span>
                                 </div>
                             </div>
                             <div class="moto-card-body">

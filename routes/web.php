@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/accesorios', [HomeController::class, 'accessories'])->name('accessories.index');
 
 // Motos
 Route::get('/motos-colombia', [MotoController::class, 'colombia'])->name('motos.colombia');
@@ -40,10 +41,15 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/motos', [AdminController::class, 'motos'])->name('motos');
     Route::get('/motos/nueva', [AdminController::class, 'createMoto'])->name('motos.create');
     Route::post('/motos', [AdminController::class, 'storeMoto'])->name('motos.store');
+    Route::get('/motos/{id}/editar', [AdminController::class, 'editMoto'])->name('motos.edit');
+    Route::put('/motos/{id}', [AdminController::class, 'updateMoto'])->name('motos.update');
     Route::post('/motos/{id}/activar', [AdminController::class, 'activateMoto'])->name('motos.activate');
+    Route::delete('/motos/{id}', [AdminController::class, 'deleteMoto'])->name('motos.delete');
     Route::get('/motos/{id}/preview', [AdminController::class, 'preview'])->name('motos.preview');
     Route::get('/pedidos', [AdminController::class, 'orders'])->name('orders');
     Route::get('/accesorios', [AdminController::class, 'accessories'])->name('accessories');
     Route::get('/accesorios/nuevo', [AdminController::class, 'createAccessory'])->name('accessories.create');
     Route::post('/accesorios', [AdminController::class, 'storeAccessory'])->name('accessories.store');
+    Route::get('/accesorios/{id}/editar', [AdminController::class, 'editAccessory'])->name('accessories.edit');
+    Route::put('/accesorios/{id}', [AdminController::class, 'updateAccessory'])->name('accessories.update');
 });

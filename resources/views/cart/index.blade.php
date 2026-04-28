@@ -51,7 +51,7 @@
                                 <tr>
                                     <td colspan="5" class="text-center py-5">
                                         <p>Tu carrito está vacío.</p>
-                                        <a href="{{ route('home') }}#accesorios" class="btn btn-primary mt-10">Ver Accesorios</a>
+                                        <a href="{{ route('accessories.index') }}" class="btn btn-primary mt-10">Ver Accesorios</a>
                                     </td>
                                 </tr>
                             @endforelse
@@ -59,7 +59,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <div class="col-lg-4">
                 <div class="bg-white p-30 shadow-sm rounded">
                     <h4>Resumen del Pedido</h4>
@@ -75,7 +75,7 @@
                         <span>Total</span>
                         <span class="text-primary">${{ number_format($total, 0, ',', '.') }}</span>
                     </div>
-                    
+
                     <h5 class="mt-30">Información de Envío</h5>
                     <form action="{{ route('cart.updateCustomer', $items->first()->id_carrito_pro ?? 0) }}" method="POST">
                         @csrf
@@ -91,7 +91,7 @@
                         <div class="form-group">
                             <textarea name="direccion" class="form-control" placeholder="Dirección de envío" required>{{ $items->first()->direccion ?? '' }}</textarea>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary btn-block mt-20" {{ $items->isEmpty() ? 'disabled' : '' }}>
                             Proceder al Pago
                         </button>

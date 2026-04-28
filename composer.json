@@ -40,6 +40,19 @@
             "npm install",
             "npm run build"
         ],
+        "optimize:prod": [
+            "@php artisan config:cache",
+            "@php artisan route:cache",
+            "@php artisan view:cache",
+            "@php artisan event:cache"
+        ],
+        "deploy:prod": [
+            "@php artisan migrate --force",
+            "@php artisan storage:link --force",
+            "@php artisan optimize:clear",
+            "@composer dump-autoload --optimize --classmap-authoritative",
+            "@optimize:prod"
+        ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"

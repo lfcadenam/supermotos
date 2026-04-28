@@ -38,12 +38,12 @@
                 <tbody>
                     @foreach($accessories as $item)
                         <tr>
-                            <td><img src="{{ asset('fotos_motos/' . $item->foto) }}" width="50"></td>
+                            <td><img src="{{ $item->photoUrl() }}" width="50" alt="{{ $item->nombre }}"></td>
                             <td>{{ $item->nombre }}</td>
                             <td>${{ number_format($item->valor, 0, ',', '.') }}</td>
                             <td><span class="badge badge-success">Activo</span></td>
                             <td>
-                                <button class="btn btn-sm btn-info"><i class="ti-pencil"></i></button>
+                                <a href="{{ route('admin.accessories.edit', $item->id_accesorio) }}" class="btn btn-sm btn-info" title="Editar"><i class="ti-pencil"></i></a>
                                 <button class="btn btn-sm btn-danger"><i class="ti-trash"></i></button>
                             </td>
                         </tr>

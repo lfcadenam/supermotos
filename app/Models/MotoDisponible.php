@@ -31,4 +31,42 @@ class MotoDisponible extends Model
         'fecha_registro',
         'ruta'
     ];
+
+    public function photoFolder(?string $filename = null): string
+    {
+        $filename = trim($filename ?? $this->firstPhotoName());
+
+        if ($filename === '') {
+            return 'fotos_motos/';
+        }
+
+        $primaryPath = public_path('fotos_motos/' . $filename);
+        $legacyPath = public_path('admin_files/fotos_motos/' . $filename);
+
+        if (file_exists($primaryPath) || ! file_exists($legacyPath)) {
+            return 'fotos_motos/';
+        }
+
+        return 'admin_files/fotos_motos/';
+    }
+
+    public function photoUrl(?string $filename = null): string
+    {
+        $filename = trim($filename ?? $this->firstPhotoName());
+
+        if ($filename === '') {
+            return asset('img/no-image.png');
+        }
+
+        return asset($this->photoFolder($filename) . $filename);
+    }
+
+    protected function firstPhotoName(): string
+    {
+        if (empty($this->fotos)) {
+            return '';
+        }
+
+        return trim(explode(',', $this->fotos)[0]);
+    }
 }

@@ -18,7 +18,7 @@
         <div class="bg-white p-30 shadow-sm rounded">
             <div class="d-flex justify-content-between align-items-center mb-20">
                 <h4>Listado de Motos</h4>
-                <a href="{{ route('motos.create') }}" class="btn btn-primary">Nueva Publicación</a>
+                <a href="{{ route('admin.motos.create') }}" class="btn btn-primary">Nueva Publicación</a>
             </div>
 
             @if(session('success'))
@@ -43,13 +43,13 @@
                             <tr>
                                 <td><span class="text-muted small">#{{ $moto->id_moto_disp }}</span></td>
                                 <td>
-                                    @php 
-                                        $fotos = explode(',', $moto->fotos); 
+                                    @php
+                                        $fotos = explode(',', $moto->fotos);
                                         $mainFoto = !empty($fotos[0]) ? trim($fotos[0]) : 'no-image.png';
-                                        $folder = ($moto->moto_inv_ext == 2) ? 'fotos_motos/' : 'admin_files/fotos_motos/';
+                                        $fallbackImage = asset('img/no-image.png');
                                     @endphp
                                     <div class="rounded shadow-sm overflow-hidden" style="width: 60px; height: 45px;">
-                                        <img src="{{ asset($folder . $mainFoto) }}" alt="{{ $moto->nombre }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='{{ asset('img/no-image.png') }}'">
+                                        <img src="{{ $moto->photoUrl($mainFoto) }}" alt="{{ $moto->nombre }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='{{ $fallbackImage }}'">
                                     </div>
                                 </td>
                                 <td><strong>{{ $moto->nombre }}</strong></td>
@@ -65,12 +65,20 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-sm btn-outline-info btn-preview" data-id="{{ $moto->id_moto_disp }}" title="Previsualizar">
+                                    <div class="btn-action-container">
+                                        <button class="btn btn-sm btn-info btn-preview" data-id="{{ $moto->id_moto_disp }}" title="Previsualizar">
                                             <i class="fa fa-eye"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-outline-primary" title="Editar"><i class="fa fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                        <a href="{{ route('admin.motos.edit', $moto->id_moto_disp) }}" class="btn btn-sm btn-primary" title="Editar">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+                                        <form action="{{ route('admin.motos.delete', $moto->id_moto_disp) }}" method="POST" class="d-inline delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-sm btn-danger btn-delete" title="Eliminar">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -112,9 +120,30 @@ $(document).ready(function() {
         const id = $(this).data('id');
         $('#previewContent').html('<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div></div>');
         $('#previewModal').modal('show');
-        
+
         $.get(`/admin/motos/${id}/preview`, function(data) {
             $('#previewContent').html(data);
+        });
+    });
+
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        const form = $(this).closest('form');
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta publicación será rechazada o eliminada del sistema.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
         });
     });
 });
